@@ -1,0 +1,14 @@
+// global variables
+@import 'components/variables';
+// reset
+@import '../../../node_modules/normalize-scss/sass/normalize';
+// common styles
+@import 'components/global';
+// components
+@import 'components/App';
+@import 'components/HomePage';
+@import 'components/StartPage';
+@import 'components/SignUpForm';
+@import 'components/SignUpPage';
+@import 'components/LoginForm';
+@import 'components/LoginPage';
