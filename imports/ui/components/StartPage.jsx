@@ -1,11 +1,15 @@
 import React, { Component } from 'react';
+import StartPageBackground from './StartPageBackground';
 
 class StartPage extends Component {
   render() {
     return (
-      <div className="StartPage">
-        StartPage
-      </div>
+      <>
+        <StartPageBackground />
+        <div className="StartPage">
+          <h1>Welcome to wonderful maps</h1>
+        </div>
+      </>
     );
   }
 };

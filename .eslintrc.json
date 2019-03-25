@@ -1,5 +1,5 @@
 {
-  "extends": ["standard", "standard-jsx"],
+  "extends": ["react-app", "standard", "standard-jsx"],
   "plugins": ["jsx-a11y"],
   "globals": {
     "Headers": true,
