@@ -1,3 +1,7 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
   overflow-x: hidden;
@@ -6,4 +10,13 @@ body {
     size: 17px;
   }
   background-color: $app-background;
+}
+
+a {
+  text-decoration: none;
+  color: #1976D2;
+}
+
+a:hover {
+  text-decoration: underline;
 }

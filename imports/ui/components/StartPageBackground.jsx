@@ -13,7 +13,7 @@ class StartPageBackground extends Component {
     this.programInfo.data.mouse[1] = e.clientY;
   }
 
-  initBuffers = (gl) => {
+  initBuffers = gl => {
     const positionBuffer = gl.createBuffer();
 
     gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
@@ -37,7 +37,7 @@ class StartPageBackground extends Component {
 
   drawScene = (gl, programInfo, buffers) => {
     gl.clearColor(0.0, 0.0, 0.0, 1.0);
-
+    gl.viewport(0, 0, gl.canvas.clientWidth, gl.canvas.clientHeight);
     gl.clear(gl.COLOR_BUFFER_BIT);
 
     {
@@ -71,10 +71,18 @@ class StartPageBackground extends Component {
     }
   };
 
-  componentDidMount() {
-    const canvas = this.ref.current;
+  handleResize(canvas) {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
+  }
+
+  componentDidMount() {
+    const canvas = this.ref.current;
+    this.handleResize(canvas);
+
+    window.addEventListener("resize", () => {
+      this.handleResize(canvas);
+    });
 
     let gl = canvas.getContext("webgl");
 
