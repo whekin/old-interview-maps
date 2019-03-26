@@ -18,7 +18,7 @@ class App extends Component {
         <div className="App">
           <Route exact path="/" render={
             () => !currentUser ? <Redirect to="/signup" /> : ""} />
-          <Route path="/signup" render={
+          <Route path="/(signup|login)" render={
             () => currentUser ? <Redirect to="/" /> : ""} />
 
           { currentUser
