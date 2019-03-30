@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { Map as LeafletMap, Marker, Popup, TileLayer } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
-import { Route, withRouter } from 'react-router';
+import { Route, withRouter, Redirect } from 'react-router';
 import { Markers } from '../../api/markers';
 import { withTracker } from 'meteor/react-meteor-data';
 import SideBar from './SideBar';
+import EditMarker from './EditMarker';
 import { Meteor } from 'meteor/meteor';
 
 class HomePage extends Component {
@@ -15,7 +16,8 @@ class HomePage extends Component {
     marker: {
       lat: 47.227088,
       lng: 39.714387
-    }
+    },
+    editMarker: null
   }
 
   openSideBar = () => {
@@ -84,7 +86,16 @@ class HomePage extends Component {
           } />
           {
             this.props.markers.map(marker => (
-              <Marker key={marker._id} position={[marker.coords.lat, marker.coords.lng]}>
+              <Marker
+                key={marker._id}
+                ondblclick={() => {
+                  this.setState({
+                    editMarker: marker
+                  }, () => {
+                    this.props.history.push(`/edit`);
+                  });
+                }}
+                position={[marker.coords.lat, marker.coords.lng]}>
                 {marker.name.length > 0 &&
                   <Popup>
                     {marker.name}
@@ -103,6 +114,13 @@ class HomePage extends Component {
             }}
             zoom={this.state.zoom} />
         } />
+        <Route path="/edit" render={() => {
+          if (this.state.editMarker) {
+            return <EditMarker editMarker={this.state.editMarker} />;
+          } else {
+            return <Redirect to="/" />;
+          }
+        }} />
       </div>
     );
   }

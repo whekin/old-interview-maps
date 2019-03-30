@@ -5,7 +5,6 @@
   outline: none;
   height: 30px;
   padding: 5px 10px;
-  line-height: 17px;
   cursor: pointer;
   background-color: $backcol;
   color: #fff;
@@ -18,5 +17,36 @@
   &:hover {
     background-color: $hoverbackcol;
     box-shadow: 0 0 0px 5px $hoverbackcol;
+  }
+}
+
+.btn-close {
+  $backcol: #f44336;
+  $hoverbackcol: #d32f2f;
+  width: 25px;
+  height: 25px;
+  font-size: 16px;
+  cursor: pointer;
+  text-align: center;
+  border-radius: 50%;
+  background-color: $backcol;
+  color: #fff;
+  border: 3px solid #fff;
+  box-shadow: 0 0 0 3px $backcol;
+  transition-duration: 0.4s;
+
+  &:hover {
+    background-color: $hoverbackcol;
+    box-shadow: 0 0 0 5px $hoverbackcol;
+  }
+}
+
+@mixin btnColor($backcol, $hoverbackcol) {
+  background-color: $backcol;
+  box-shadow: 0 0 0 3px $backcol;
+      
+  &:hover {
+    background-color: $hoverbackcol;
+    box-shadow: 0 0 0 5px $hoverbackcol;
   }
 }

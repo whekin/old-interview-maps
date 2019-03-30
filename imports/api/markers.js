@@ -30,5 +30,27 @@ Meteor.methods({
       ...data,
       owner: Meteor.userId()
     });
+  },
+  'markers.delete'(id) {
+    check(id, String);
+
+    if (!this.userId) {
+      throw new Meteor.Error('not authorized');
+    }
+
+    return Markers.remove({
+      _id: { $eq: id }
+    });
+  },
+  'markers.update'(id, data) {
+    if (!this.userId) {
+      throw new Meteor.Error('not authorized');
+    }
+
+    return Markers.update(id, {
+      $set: {
+        name: data.name
+      }
+    });
   }
 });
