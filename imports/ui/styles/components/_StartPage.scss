@@ -50,6 +50,8 @@
 
 .SignUpForm button,
 .LoginForm button {
+  $backcol: #2196F3;
+  $hoverbackcol: #1976D2;
   cursor: pointer;
   padding: 13px;
   margin: 10px 0;
@@ -59,12 +61,14 @@
   border-radius: 25px;
   color: white;
   font-size: 20px;
-  background-color: #2196F3;
+  background-color: $backcol;
+  border: 3px solid #fff;
   transition-duration: 0.4s;
-  box-shadow: 0 0 5px rgba(255, 255, 255, 0.2);
+  box-shadow: 0 0 0 3px $backcol;
   
   &:hover {
-    background-color: #1976D2;
+    background-color: 0 $hoverbackcol;
+    box-shadow: 0 0 0 5px $hoverbackcol;
   }
 }
 

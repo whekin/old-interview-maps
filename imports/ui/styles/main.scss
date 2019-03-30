@@ -4,7 +4,10 @@
 @import '../../../node_modules/normalize-scss/sass/normalize';
 // common styles
 @import 'components/global';
+
+@import 'components/btn';
 // components
 @import 'components/App';
 @import 'components/HomePage';
+@import 'components/SideBar';
 @import 'components/StartPage';

@@ -1,0 +1,84 @@
+.SideBar {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: calc(100vw - 400px);
+  bottom: 0;
+  background-color: $app-background;
+  z-index: 10000;
+  animation: show 0.4s ease-out forwards;
+
+  .btn-close {
+    $backcol: #f44336;
+    $hoverbackcol: #d32f2f;
+    width: 25px;
+    height: 25px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 15px;
+    cursor: pointer;
+    text-align: center;
+    border-radius: 50%;
+    background-color: $backcol;
+    color: #fff;
+    border: 3px solid #fff;
+    box-shadow: 0 0 0 3px $backcol;
+    transition-duration: 0.4s;
+
+    &:hover {
+      background-color: $hoverbackcol;
+      box-shadow: 0 0 0 5px $hoverbackcol;
+    }
+  }
+
+  form {
+    width: 270px;
+    margin: 0 auto;
+    text-align: center;
+
+    input {
+      padding: 5px 10px;
+      margin-bottom: 10px;
+      outline: none;
+    }
+
+    input[name=name] {
+      display: block;
+      width: 100%;
+      border-radius: 5px;
+      border: 3px solid #222;
+    }
+
+    input[name=lat],
+    input[name=lng] {
+      width: 45%;
+      height: 30px;
+      margin-left: 5px;
+      margin-right: 5px;
+      text-align: center;
+      background-color: #FFB74D;
+      border: none;
+      border-radius: 15px;
+    }
+
+    ::placeholder {
+      color: #222;
+    }
+
+    button {
+      margin-top: 5px;
+    }
+  }
+ 
+}
+
+@keyframes show {
+  from {
+    transform: translateX(100%);
+  }
+
+  to {
+    transform: translateX(0);
+  }
+}
