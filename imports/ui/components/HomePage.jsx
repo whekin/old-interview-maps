@@ -59,12 +59,20 @@ class HomePage extends Component {
     });
   }
 
+  handleExit = e => {
+    Meteor.logout();
+  }
+
   render() {
     const position = [this.state.lat, this.state.lng];
 
     return (
       <div className="HomePage">
-        <button onClick={this.openSideBar} className="btn">Add</button>
+        <div className="btn-group">
+          <button name="add" onClick={this.openSideBar} className="btn">Add</button>
+          <button name="exit" onClick={this.handleExit} className="btn">Exit</button>
+        </div>
+
         <LeafletMap
           ondblclick={this.handleDoubleClick}
           doubleClickZoom={false}

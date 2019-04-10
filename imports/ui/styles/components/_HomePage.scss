@@ -1,8 +1,17 @@
 .HomePage {
-  & > .btn {
+  .btn-group {
     position: absolute;
     right: 20px;
     top: 20px;
+    z-index: 1000;
+
+    .btn {
+      margin: 0 5px;
+    }
+
+    .btn[name=exit] {
+      @include btnColor(#f44336, #d32f2f);
+    }
   }
 }
 
