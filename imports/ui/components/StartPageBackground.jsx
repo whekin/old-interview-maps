@@ -11,8 +11,6 @@ class StartPageBackground extends Component {
   handleMouseMove = e => {
     this.programInfo.data.mouse[0] = e.clientX;
     this.programInfo.data.mouse[1] = window.innerHeight - e.clientY;
-
-    console.log(e);
   }
 
   initBuffers = gl => {
@@ -76,6 +74,11 @@ class StartPageBackground extends Component {
   handleResize(canvas) {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener("resize", this.handleResize);
+    window.removeEventListener("mousemove", this.handleMouseMove);
   }
 
   componentDidMount() {
