@@ -160,6 +160,8 @@ class StartPageBackground extends Component {
     void main() {
         vec2 st = gl_FragCoord.xy/resolution.xy*3.;
         // st += st * abs(sin(time*0.1)*3.0);
+        vec2 uv = gl_FragCoord.xy / resolution;
+        vec2 amouse = mouse / resolution;
         vec3 color = vec3(0.0);
 
         vec2 q = vec2(0.);
@@ -170,7 +172,7 @@ class StartPageBackground extends Component {
         r.x = fbm( st + 1.0*q + vec2(1.7,9.2)+ 0.15*time );
         r.y = fbm( st + 1.0*q + vec2(8.3,2.8)+ 0.126*time);
 
-        float f = fbm(st+r);
+        float f = fbm(st+r / pow(1.0 - distance(amouse, uv), 3.0));
 
         color = mix(vec3(0.101961,0.619608,0.666667),
                     vec3(0.666667,0.666667,0.498039),
@@ -184,12 +186,10 @@ class StartPageBackground extends Component {
                     vec3(0.666667,1,1),
                     clamp(length(r.x),0.0,1.0));
         float fac = resolution.x / resolution.y;
-        
-        vec2 amouse = mouse / resolution;
 
-        color = mix(color,
-                    vec3(1.0 - distance(gl_FragCoord.xy / resolution.x, vec2(amouse.x, amouse.y / fac)) * 3.0),
-                    0.5);
+        // color = mix(color,
+        //             vec3(1.0 - distance(gl_FragCoord.xy / resolution.x, vec2(amouse.x, amouse.y / fac)) * 3.0),
+        //             0.5);
         gl_FragColor = vec4((f*f*f+.6*f*f+.5*f)*color,1.);
     }
     `;
