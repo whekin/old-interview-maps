@@ -10,7 +10,9 @@ class StartPageBackground extends Component {
 
   handleMouseMove = e => {
     this.programInfo.data.mouse[0] = e.clientX;
-    this.programInfo.data.mouse[1] = e.clientY;
+    this.programInfo.data.mouse[1] = window.innerHeight - e.clientY;
+
+    console.log(e);
   }
 
   initBuffers = gl => {
@@ -84,6 +86,8 @@ class StartPageBackground extends Component {
       this.handleResize(canvas);
     });
 
+    window.addEventListener("mousemove", this.handleMouseMove);
+
     let gl = canvas.getContext("webgl");
 
     if (gl === null) {
@@ -102,9 +106,7 @@ class StartPageBackground extends Component {
     `;
 
     const fsSource = `
-    #ifdef GL_ES
     precision mediump float;
-    #endif
 
     uniform vec2 resolution;
     uniform vec2 mouse;
@@ -178,7 +180,13 @@ class StartPageBackground extends Component {
         color = mix(color,
                     vec3(0.666667,1,1),
                     clamp(length(r.x),0.0,1.0));
+        float fac = resolution.x / resolution.y;
+        
+        vec2 amouse = mouse / resolution;
 
+        color = mix(color,
+                    vec3(1.0 - distance(gl_FragCoord.xy / resolution.x, vec2(amouse.x, amouse.y / fac)) * 3.0),
+                    0.5);
         gl_FragColor = vec4((f*f*f+.6*f*f+.5*f)*color,1.);
     }
     `;
@@ -216,8 +224,7 @@ class StartPageBackground extends Component {
     return (
       <canvas
         ref={this.ref}
-        className="StartPageBackground"
-        onMouseMove={this.handleMouseMove}>Canvas is not supported</canvas>
+        className="StartPageBackground">Canvas is not supported</canvas>
     );
   }
 }
