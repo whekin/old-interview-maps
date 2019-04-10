@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
 import StartPageBackground from './StartPageBackground';
-import SignUpForm from './SignUpForm';
+import SignUpForm from '../containers/SignUpForm';
 import LoginForm from './LoginForm';
 
 class StartPage extends Component {

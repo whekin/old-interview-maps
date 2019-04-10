@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { Meteor } from 'meteor/meteor';
 import { Link, withRouter } from 'react-router-dom';
-import { validateInput, validateInputs } from '../logic/validate';
-import Alert from 'react-s-alert';
+import { validateInput, validateInputs } from '../helpers/validate';
+import { connect } from 'react-redux';
+import { notification } from '../redux/notifications';
 
 const validData = {
   email: ["email", {}],
@@ -42,7 +43,7 @@ class SignUpForm extends Component {
         password
       }, (err, res) => {
         if (err) {
-          Alert.error(err);
+          notification("error", err);
         }
         if (res) {
           this.props.history.push("/login");
@@ -93,4 +94,6 @@ class SignUpForm extends Component {
   }
 };
 
-export default withRouter(SignUpForm);
+const SignUpFormWithRedux = connect(null, { notification })(SignUpForm);
+
+export default withRouter(SignUpFormWithRedux);

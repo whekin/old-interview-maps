@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
-import { validateInput, validateInputs } from '../logic/validate';
+import { validateInput, validateInputs } from '../helpers/validate';
 import { Meteor } from 'meteor/meteor';
-import Alert from 'react-s-alert';
+import { connect } from 'react-redux';
+import { notification } from '../redux/notifications';
 
 const validData = {
   email: ["email", {}],
@@ -26,6 +27,8 @@ class LoginForm extends Component {
     }
 
     handleSubmit = e => {
+      const { notification } = this.props;
+
       e.preventDefault();
       const isValid = validateInputs(validData, this.state);
 
@@ -34,7 +37,7 @@ class LoginForm extends Component {
 
         Meteor.loginWithPassword(email, password, err => {
           if (err) {
-            Alert.error(err);
+            notification("error", err);
           } else {
             this.props.history.push("/");
           }
@@ -71,4 +74,6 @@ class LoginForm extends Component {
     }
 };
 
-export default withRouter(LoginForm);
+const LoginFormWithRedux = connect(null, { notification })(LoginForm);
+
+export default withRouter(LoginFormWithRedux);

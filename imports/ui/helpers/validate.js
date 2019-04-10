@@ -1,4 +1,9 @@
-import Alert from 'react-s-alert';
+import { notification as notificationReducer } from '../redux/notifications';
+import store from '../redux';
+
+const notification = (...args) => {
+  store.dispatch(notificationReducer(...args));
+};
 
 const emailReg = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/; // RFC 2822
 
@@ -100,14 +105,6 @@ export const validate = (type, val, ...args) => {
   }
 };
 
-const alertWarningConfig = {
-  position: 'top-right',
-  effect: 'slide',
-  beep: false,
-  timeout: 3000,
-  offset: 100
-};
-
 export const validateInput = (valData, name, val) => {
   let isValid = true;
 
@@ -118,7 +115,7 @@ export const validateInput = (valData, name, val) => {
     err => {
       if (err) {
         isValid = false;
-        Alert.warning(err, alertWarningConfig);
+        notification("error", err);
       }
     });
 
@@ -128,18 +125,10 @@ export const validateInput = (valData, name, val) => {
 export const validateInputs = (validData, data) => {
   let isValid = true;
 
-  const alertWarningConfig = {
-    position: 'top-right',
-    effect: 'slide',
-    beep: false,
-    timeout: 3000,
-    offset: 100
-  };
-
   const callback = err => {
     if (err) {
       isValid = false;
-      Alert.warning(err, alertWarningConfig);
+      notification("error", err);
     }
   };
 

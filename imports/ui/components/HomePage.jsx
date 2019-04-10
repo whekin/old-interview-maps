@@ -126,9 +126,12 @@ class HomePage extends Component {
   }
 }
 
-export default withTracker(() => {
+const HomePageWithData = withTracker(() => {
   Meteor.subscribe('markers');
+
   return {
     markers: Markers.find({}).fetch()
   };
-})(withRouter(HomePage));
+})(HomePage);
+
+export default withRouter(HomePageWithData);

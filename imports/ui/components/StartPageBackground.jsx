@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { initShaderProgram } from '../logic/glFuncs';
+import { initShaderProgram } from '../helpers/glFuncs';
 
 class StartPageBackground extends Component {
   constructor(props) {
